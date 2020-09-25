@@ -12,4 +12,16 @@
     <string name="mobile_number">mobile number</string>
     <string name="username">username</string>
     <string name="name">name</string>
+    <string name="ready_to_evolve_with_artificial_intelligence">Ready To\nEvolve With \nArtificial \nIntelligence?</string>
+    <string name="profile_created_at">profile created at</string>
+    <string name="action_logout">logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    //fragments
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_users">Users</string>
+
 </resources>
