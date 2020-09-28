@@ -19,6 +19,15 @@ public class Users {
         this.imageURL = imageURL;
     }
 
+    public Users(String username, String name, String email, String password, String createdAt, String imageURL) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.imageURL = imageURL;
+    }
+
     public Users() {
     }
 

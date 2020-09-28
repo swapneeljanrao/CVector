@@ -41,8 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
         changeStatusBarColor();
         dbHelper = new DBHelper(this);
         initViews();
-
-
     }
 
     private void changeStatusBarColor() {
@@ -57,7 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void gotoLogin(View view) {
         startActivity(new Intent(this, LoginActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
-
     }
 
     public void onRegisterClick(View view) {
@@ -67,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
             String strEmail = editTextEmail.getText().toString();
             String strPassword = editTextPassword.getText().toString();
 
-
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf;
             sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
@@ -75,7 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (!dbHelper.isEmailExists(strEmail)) {
                 if (!dbHelper.isUsernameAvaialable(strUserName)) {
-
                     dbHelper.addUser(new Users(null, strUserName, strName, strEmail, strPassword, joiningDate, null));
                     startActivity(new Intent(this, LoginActivity.class));
                     overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
@@ -90,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         /*startActivity(new Intent(this, LoginActivity.class));
         overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);*/
-
     }
 
     private void initViews() {

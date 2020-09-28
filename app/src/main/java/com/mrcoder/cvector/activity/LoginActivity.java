@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextUsername;
     EditText editTextPassword;
 
+    String strUsername, strPassword;
+
     TextInputLayout textInputLayoutEmail;
     TextInputLayout textInputLayoutPassword;
 
@@ -49,22 +51,30 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginClick(View view) {
 
         //code without validateUser()
-        String strUsername = editTextUsername.getText().toString();
-        String strPassword = editTextPassword.getText().toString();
+        strUsername = editTextUsername.getText().toString();
+        strPassword = editTextPassword.getText().toString();
 
         Users currentUser = dbHelper.AuthenticateUser(new Users(null, strUsername, null, null, strPassword, null, null));
         if (currentUser != null) {
 //            Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
-            Intent homeIntent = new Intent(this, HomeActivity.class);
+            /*Intent homeIntent = new Intent(this, MainActivity.class);
             homeIntent.putExtra("userName", strUsername);
-            startActivity(homeIntent);
+            Bundle bundle = new Bundle();
+
+            bundle.putString("username", strUsername );
+            ProfileFragment fragProfile = new ProfileFragment();
+            fragProfile.setArguments(bundle);
+
+            startActivity(homeIntent);*/
+
 
             Toast.makeText(this, "Successfully Logged in!", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
             // overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
         } else {
 //            Snackbar.make(buttonLogin, "Logged failed!", Snackbar.LENGTH_LONG).show();
-            Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show();
 
         }
         //Code with validateUser();
@@ -82,8 +92,10 @@ public class LoginActivity extends AppCompatActivity {
                 Snackbar.make(buttonLogin, "Logged failed!", Snackbar.LENGTH_LONG).show();
             }
         }*/
+    }
 
-        finish();
+    public String sendUsername() {
+        return strUsername;
     }
 
     private void initViews() {

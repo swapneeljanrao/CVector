@@ -1,173 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:attrs="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Fragments.UsersFragment">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".Fragments.ProfileFragment">
+        android:layout_height="0dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/profileFragment_UserProfileImage"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:src="@drawable/userphoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/navigation_toolbar_goGaga"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="My Profile"
-                android:background="@color/colorPrimary"
-                app:titleTextColor="@color/whiteTextColor">
+        <!--<de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileFragment_UserProfileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/userphoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
 
-                <!--<androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    app:layout_constraintEnd_toEndOf="@+id/navigation_toolbar_goGaga"
-                    app:layout_constraintStart_toStartOf="@+id/navigation_toolbar_goGaga"
-                    app:layout_constraintTop_toTopOf="@+id/navigation_toolbar_goGaga">
+        <!--<de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileFragment_UserProfileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/userphoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Profile"
-                        android:textColor="#7A1F3E"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <!--<ImageButton
+            android:id="@+id/profileFragment_pickPhoto"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/round_button"
+            android:padding="10dp"
+            android:src="@drawable/ic_camera"
+            android:tint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/profileFragment_UserProfileImage"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_UserProfileImage" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>-->
-            </androidx.appcompat.widget.Toolbar>
+        <View
+            android:id="@+id/profileFragment_view1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_UserProfileImage"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_UserProfileImage"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_UserProfileImage" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager_profile"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/navigation_toolbar_goGaga" />
-
-            <LinearLayout
-                android:id="@+id/ll_dots"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPager_profile" />
-            <!--<com.rd.PageIndicatorView
-                android:id="@+id/pageIndicatorView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:layout_constraintEnd_toEndOf="@+id/viewPager_profile"
-                app:layout_constraintStart_toStartOf="@+id/viewPager_profile"
-                app:layout_constraintTop_toBottomOf="@id/viewPager_profile"
-                app:piv_animationType="scale"
-                app:piv_dynamicCount="true"
-                app:piv_interactiveAnimation="true"
-                app:piv_selectedColor="@android:color/white"
-                app:piv_unselectedColor="@android:color/black"
-                app:piv_viewPager="@id/viewPager_profile"
-                attrs:piv_padding="12dp"
-                attrs:piv_radius="8dp" />-->
-
-            <ImageView
-                android:id="@+id/image_cake"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_cake"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_dots" />
-
-            <TextView
-                android:id="@+id/profile_userName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Swapnil,"
-                android:textColor="#7A1F3E"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/image_cake"
-                app:layout_constraintStart_toEndOf="@+id/image_cake"
-                app:layout_constraintTop_toTopOf="@+id/image_cake" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="25, Cancer"
-                android:textColor="#7A1F3E"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_userName"
-                app:layout_constraintStart_toEndOf="@+id/profile_userName"
-                app:layout_constraintTop_toTopOf="@+id/profile_userName" />
-
-            <ImageView
-                android:id="@+id/image_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
-                android:padding="10dp"
-                android:src="@drawable/ic_location"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_cake" />
-
-            <TextView
-                android:id="@+id/profile_city_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Pune, Maharashtra"
-                android:textColor="#7A1F3E"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_location"
-                app:layout_constraintStart_toEndOf="@+id/image_location"
-                app:layout_constraintTop_toTopOf="@+id/image_location" />
-
-            <ImageView
-                android:id="@+id/profile_music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
-                android:padding="10dp"
-                android:src="@drawable/ic_music"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_location"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/profile_recycler_music"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_music"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_music"
-                app:layout_constraintTop_toTopOf="@+id/profile_music" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ic_instagram"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_instagram"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_view1"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_view1" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
-</ScrollView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ic_twitter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_twitter"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_instagram"
+            app:layout_constraintEnd_toStartOf="@+id/ic_facebook"
+            app:layout_constraintStart_toEndOf="@+id/ic_instagram"
+            app:layout_constraintTop_toTopOf="@+id/ic_instagram" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ic_facebook"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_facebook_round"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_twitter"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_view1"
+            app:layout_constraintTop_toTopOf="@+id/ic_twitter" />
+
+        <View
+            android:id="@+id/profileFragment_view2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_imageViewEditName"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_imageViewPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/ic_twitter" />
+
+        <ImageView
+            android:id="@+id/profileFragment_imageViewPersonName"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_view2" />
+
+        <TextView
+            android:id="@+id/profileFragment_profile_tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Name"
+            app:layout_constraintEnd_toStartOf="@+id/profileFragment_imageViewEditName"
+            app:layout_constraintStart_toEndOf="@+id/profileFragment_imageViewPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_view2" />
+
+        <TextView
+            android:id="@+id/profileFragment_profileTvPersonName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="name"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_profile_tvName"
+            app:layout_constraintStart_toEndOf="@+id/profileFragment_imageViewPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_profile_tvName" />
+
+        <ImageView
+            android:id="@+id/profileFragment_imageViewEditName"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/edit_post"
+            app:layout_constraintBottom_toBottomOf="@+id/profileFragment_profileTvPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profileFragment_profile_tvName" />
+
+        <View
+            android:id="@+id/profileFragment_profile_view2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_imageViewEditName"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_imageViewNumber"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_profileTvPersonName" />
+
+        <ImageView
+            android:id="@+id/profileFragment_imageViewAbout"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_profile_view3" />
+
+
+        <ImageView
+            android:id="@+id/profileFragment_imageViewNumber"
+            android:layout_width="25dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_profile_view2" />
+
+        <TextView
+            android:id="@+id/profileFragment_tvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileFragment_imageViewNumber"
+            app:layout_constraintTop_toTopOf="@+id/profileFragment_imageViewNumber" />
+
+        <TextView
+            android:id="@+id/profileFragment_tvEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Email"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_tvPhone"
+            app:layout_constraintStart_toEndOf="@+id/profileFragment_imageViewNumber"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_tvPhone" />
+
+        <TextView
+            android:id="@+id/profileFragment_tvUserSince"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="User since"
+            app:layout_constraintEnd_toStartOf="@+id/profileFragment_imageView_EditAbout"
+            app:layout_constraintStart_toEndOf="@+id/profileFragment_imageViewAbout"
+            app:layout_constraintTop_toTopOf="@+id/profileFragment_imageViewAbout" />
+
+        <TextView
+            android:id="@+id/profileFragment_tvProfileTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="date and time"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_tvUserSince"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_tvUserSince"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_tvUserSince" />
+
+        <ImageView
+            android:id="@+id/profileFragment_imageView_EditAbout"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/edit_post"
+            app:layout_constraintBottom_toBottomOf="@+id/profileFragment_tvProfileTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profileFragment_tvUserSince" />
+
+        <View
+            android:id="@+id/profileFragment_profile_view3"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@+id/profileFragment_imageView_EditAbout"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_imageViewAbout"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_tvEmail" />
+
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/profileFragment_btnDeleteAccount"
+            style="@style/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Delete Account"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/profileFragment_imageViewAbout"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_tvProfileTime" />
+
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/profileFragment_btnSignOut"
+            style="@style/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="Sign Out"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/profileFragment_imageView_EditAbout"
+            app:layout_constraintStart_toEndOf="@+id/profileFragment_btnDeleteAccount"
+            app:layout_constraintTop_toBottomOf="@+id/profileFragment_tvProfileTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView><!--</FrameLayout>-->

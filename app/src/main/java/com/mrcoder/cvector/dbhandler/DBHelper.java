@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.mrcoder.cvector.activity.LoginActivity;
 import com.mrcoder.cvector.model.Posts;
 import com.mrcoder.cvector.model.Users;
 
@@ -33,6 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_1_POST_TITLE = "post_title";
     private static final String COLUMN_2_POST_IMAGE = "post_image";
     private static final String COLUMN_3_POSTED_AT = "posted_at";
+    private static final String COLUMN_4_POSTED_BY_USERNAME = "posted_by_username";
 
     String createTable_Query2 = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_1_USERNAME + " VARCHAR(255) NOT NULL , " +
             COLUMN_2_NAME + " VARCHAR(255) NOT NULL , " +
@@ -54,7 +56,8 @@ public class DBHelper extends SQLiteOpenHelper {
     String creatTable_Query_Post = "CREATE TABLE " + TABLE_USERS_POST + "(" + COLUMN_POST_ID + "INT NOT NULL ," +
             COLUMN_1_POST_TITLE + " VARCHAR(255) NOT NULL , " +
             COLUMN_2_POST_IMAGE + " LONBLOB NOT NULL , " +
-            COLUMN_3_POSTED_AT + " TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP " +
+            COLUMN_3_POSTED_AT + " TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
+            COLUMN_4_POSTED_BY_USERNAME + " VARCHAR(255) NOT NULL " +
             ")";
     /*
     * "CREATE TABLE IF NOT EXISTS employees (\n" +
@@ -82,9 +85,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(createTable_Query2);
+        db.execSQL(createTable_Query1);
         db.execSQL(creatTable_Query_Post);
-
     }
 
     @Override
@@ -96,28 +98,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public void addPost(Posts posts) {
         SQLiteDatabase dbPost = this.getWritableDatabase();
         ContentValues contentValues_Posts = new ContentValues();
-        contentValues_Posts.put(COLUMN_POST_ID, posts.getPostId());
         contentValues_Posts.put(COLUMN_1_POST_TITLE, posts.getPostTitle());
         contentValues_Posts.put(COLUMN_2_POST_IMAGE, posts.getPostImage());
         contentValues_Posts.put(COLUMN_3_POSTED_AT, posts.getPostedDateTime());
+        contentValues_Posts.put(COLUMN_4_POSTED_BY_USERNAME, posts.getPostId());
         dbPost.insert(TABLE_USERS_POST, null, contentValues_Posts);
     }
 
-    public void addUser(Users users) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_1_USERNAME, users.getUsername());
-        contentValues.put(COLUMN_2_NAME, users.getName());
-        contentValues.put(COLUMN_3_EMAIL, users.getEmail());
-        contentValues.put(COLUMN_4_PASSWORD, users.getPassword());
-        contentValues.put(COLUMN_5_CREATED_AT, users.getCreatedAt());
-        contentValues.put(COLUMN_6_USER_IMAGE, users.getImageURL());
-
-        db.insert(TABLE_NAME, null, contentValues);
-        Log.d("User inserted", "name " + users.getName() + "username" + users.getUsername() + "email" + users.getEmail() + "pass" + users.getPassword() + "Created at" + users.getCreatedAt());
-        Log.d("db inserted", db.toString());
-
-    }
 
     public Users AuthenticateUser(Users usersAuth) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -155,6 +142,57 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public void addUser(Users users) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_1_USERNAME, users.getUsername());
+        contentValues.put(COLUMN_2_NAME, users.getName());
+        contentValues.put(COLUMN_3_EMAIL, users.getEmail());
+        contentValues.put(COLUMN_4_PASSWORD, users.getPassword());
+        contentValues.put(COLUMN_5_CREATED_AT, users.getCreatedAt());
+        contentValues.put(COLUMN_6_USER_IMAGE, users.getImageURL());
+
+        db.insert(TABLE_NAME, null, contentValues);
+        Log.d("User inserted", "name " + users.getName() + "username" + users.getUsername() + "email" + users.getEmail() + "pass" + users.getPassword() + "Created at" + users.getCreatedAt());
+        Log.d("db inserted", db.toString());
+
+    }
+
+    public void deleteAccount() {
+        LoginActivity loginActivity = new LoginActivity();
+        String strUsername = loginActivity.sendUsername();
+        Log.d("usernaaaame",strUsername);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        //db.delete(TABLE_NAME, COLUMN_1_USERNAME + " = ?", new String[]{String.valueOf(deleteUser.getUsername())});
+        String deletQurery = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_1_USERNAME + " = " + strUsername + ";";
+        db.execSQL(deletQurery);
+        db.close();
+    }
+
+    public ArrayList<Posts> getAllPosts(){
+        String column[]={
+          COLUMN_1_POST_TITLE,
+          COLUMN_2_POST_IMAGE,
+          COLUMN_3_POSTED_AT,
+          COLUMN_4_POSTED_BY_USERNAME
+        };
+        ArrayList<Posts> postList =new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS_POST, null,null,null,null,null,COLUMN_4_POSTED_BY_USERNAME);
+        if (cursor.moveToFirst()){
+            do {
+                Posts posts = new Posts();
+                posts.setPostTitle(cursor.getString(cursor.getColumnIndex(COLUMN_1_POST_TITLE)));
+                posts.setPostImage(cursor.getString(cursor.getColumnIndex(COLUMN_2_POST_IMAGE)));
+                posts.setPostedDateTime(cursor.getString(cursor.getColumnIndex(COLUMN_3_POSTED_AT)));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return postList;
+    }
     public ArrayList<Users> getAllUsers() {
         String column[] = {
                 COLUMN_1_USERNAME,

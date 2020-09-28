@@ -78,11 +78,11 @@ public class UsersFragment extends Fragment {
         return view;
     }
 
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
         showAllUsers();
-    }
+    }*/
 
     private void intViews(View view) {
         recyclerUsers = view.findViewById(R.id.HoemRecycler_allUsers);

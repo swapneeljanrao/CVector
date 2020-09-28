@@ -1,7 +1,9 @@
 package com.mrcoder.cvector.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,24 +14,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mrcoder.cvector.R;
-import com.mrcoder.cvector.adapter.UsersAdapter;
+import com.mrcoder.cvector.adapter.PostAdapter;
 import com.mrcoder.cvector.dbhandler.DBHelper;
-import com.mrcoder.cvector.model.Users;
+import com.mrcoder.cvector.model.Posts;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
 
-    RecyclerView recyclerUsers;
-    UsersAdapter usersAdapter;
-    ArrayList<Users> postList;
+    RecyclerView recyclerPosts;
+    PostAdapter postAdapter;
+    ArrayList<Posts> postList;
     Context mContext;
     SQLiteDatabase db;
     DBHelper dbHelper;
 
     public HomeFragment() {
         // Required empty public constructor
+
     }
 
     @Override
@@ -41,27 +44,48 @@ public class HomeFragment extends Fragment {
         initObjects();
 
         //showAllPosts();
+        //getAllPosts();
 
         return view;
     }
 
-    private void showAllPosts(View view) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        getAllPosts();
+    }
 
+    @SuppressLint("StaticFieldLeak")
+    private void getAllPosts() {
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                postList.addAll(dbHelper.getAllPosts());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                postAdapter.notifyDataSetChanged();
+            }
+        }.execute();
     }
 
     private void initObjects() {
         dbHelper = new DBHelper(getContext());
 
         postList = new ArrayList<>();
-        usersAdapter = new UsersAdapter(postList, mContext);
+        postAdapter = new PostAdapter(postList, mContext);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerUsers.setLayoutManager(mLayoutManager);
-        recyclerUsers.setHasFixedSize(true);
-        recyclerUsers.setAdapter(usersAdapter);
+        recyclerPosts.setLayoutManager(mLayoutManager);
+        recyclerPosts.setHasFixedSize(true);
+        recyclerPosts.setAdapter(postAdapter);
     }
 
     private void intViews(View view) {
-        recyclerUsers = view.findViewById(R.id.HoemRecycler_allUsers);
+        recyclerPosts = view.findViewById(R.id.HoemRecycler_allPosts);
     }
 }
